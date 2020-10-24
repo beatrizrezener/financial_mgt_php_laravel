@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('category', 'App\Http\Controllers\CategoryController')->name('index', 'category');
-Route::resource('expense', 'App\Http\Controllers\ExpenseController')->name('index', 'expense');
+Route::resource('category', 'App\Http\Controllers\CategoryController')->name('index', 'category')->middleware('auth');
+Route::resource('expense', 'App\Http\Controllers\ExpenseController')->name('index', 'expense')->middleware('auth');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
