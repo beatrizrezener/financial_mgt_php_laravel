@@ -19,6 +19,13 @@ class ExpenseController extends Controller
         return view('Expense.index', compact('expenses'));
     }
 
+    public function category($id)
+    {
+        $expenses = Expense::where('category_id', $id)->get();
+        // $categories = Category::all();
+        return view('expense.category', compact('expenses'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -23,3 +23,4 @@ Route::resource('category', 'App\Http\Controllers\CategoryController')->name('in
 Route::resource('expense', 'App\Http\Controllers\ExpenseController')->name('index', 'expense')->middleware('auth');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/expense/{category}/category', [App\Http\Controllers\ExpenseController::class, 'category'])->name('expense.category');
