@@ -14,7 +14,8 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        //
+        $expenses = Expense::all();
+        return view('Expense.index', compact('expenses'));
     }
 
     /**
@@ -24,7 +25,7 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        //
+        return view('expense.create');
     }
 
     /**
@@ -35,7 +36,14 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'description' => 'required|max:255',
+            'date' => 'required',
+            'value' => 'required',
+            'category_id' => 'required',
+        ]);
+        $expense = Expense::create($validateData);
+        return redirect('/expense')->with('success', 'Expense successfully created');
     }
 
     /**
@@ -55,9 +63,10 @@ class ExpenseController extends Controller
      * @param  \App\Models\Expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function edit(Expense $expense)
+    public function edit($id)
     {
-        //
+        $expense = Expense::findOrfail($id);
+        return view('expense.edit', compact('expense'));
     }
 
     /**
@@ -67,9 +76,16 @@ class ExpenseController extends Controller
      * @param  \App\Models\Expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Expense $expense)
+    public function update(Request $request, $id)
     {
-        //
+        $validateData = $request->validate([
+            'description' => 'required|max:255',
+            'date' => 'required',
+            'value' => 'required',
+            'category_id' => 'required',
+        ]);
+        Expense::whereId($id)->update($validateData);
+        return redirect('/expense')->with('success', 'Expense successfully updated');
     }
 
     /**
@@ -78,8 +94,10 @@ class ExpenseController extends Controller
      * @param  \App\Models\Expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Expense $expense)
+    public function destroy($id)
     {
-        //
+        $expense = Expense::findOrfail($id);
+        $expense->delete();
+        return redirect('/expense')->with('success', 'Expense successfully removed');
     }
 }
