@@ -20,3 +20,8 @@ Generated controllers:
 > php artisan make:controller CategoryController -r -m Category
 > php artisan make:controller ExpenseController -r -m Expense
 ```
+
+List all routes:
+```
+> php artisan route:list
+```
