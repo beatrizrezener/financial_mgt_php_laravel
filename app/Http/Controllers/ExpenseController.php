@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
@@ -25,7 +26,8 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        return view('expense.create');
+        $categories = Category::all();
+        return view('expense.create', compact('categories'));
     }
 
     /**
@@ -66,7 +68,8 @@ class ExpenseController extends Controller
     public function edit($id)
     {
         $expense = Expense::findOrfail($id);
-        return view('expense.edit', compact('expense'));
+        $categories = Category::all();
+        return view('expense.edit', compact('expense', 'categories'));
     }
 
     /**

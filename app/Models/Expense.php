@@ -9,7 +9,7 @@ class Expense extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['description', 'date', 'value'];
+    protected $fillable = ['description', 'date', 'value', 'category_id'];
     protected $guarded = ['id', 'created_at', 'updated_at'];
     protected $table = 'expenses';
 
